@@ -19,22 +19,29 @@ def predict():
     if request.method == 'POST':
 
         age = int(request.form['age'])
-        sex = request.form.get('sex')
-        cp = request.form.get('cp')
+        sex = int(request.form.get('sex'))
+        cp = int(request.form.get('cp'))
         trestbps = int(request.form['trestbps'])
         chol = int(request.form['chol'])
-        fbs = request.form.get('fbs')
+        fbs = int(request.form.get('fbs'))
         restecg = int(request.form['restecg'])
         thalach = int(request.form['thalach'])
-        exang = request.form.get('exang')
+        exang = int(request.form.get('exang'))
         oldpeak = float(request.form['oldpeak'])
-        slope = request.form.get('slope')
+        slope = int(request.form.get('slope'))
         ca = int(request.form['ca'])
-        thal = request.form.get('thal')
+        thal = int(request.form.get('thal'))
+        print(type(age))
+        print(type(sex))
+        print(type(cp))
+        print(type(trestbps))
         
-        data = np.array([[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]])
-        my_prediction = model.predict(data)
-        
+        print(type(fbs))
+        print(type(oldpeak))
+        print(age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal)
+        #data = np.array([[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]])
+        my_prediction = model.predict([[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]])
+        print(my_prediction)
         return render_template('result.html', prediction=my_prediction)
         
         
